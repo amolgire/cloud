@@ -39,11 +39,10 @@ resource "aws_security_group" "mysecuritygroup" {
 
 resource "aws_instance" "http_server" {
     ami = data.aws_ami.aws_linux_2_latest.id
-    count = 2
     key_name ="Amol-key"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.mysecuritygroup.id]
-    subnet_id = tolist(data.aws_subnet_ids.default_subnet.ids)[0,1]
+    subnet_id = tolist(data.aws_subnet_ids.default_subnet.ids)[0]
 
     connection{
         type = "ssh"
